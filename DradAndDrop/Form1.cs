@@ -12,24 +12,24 @@ namespace DradAndDrop
 {
 	public partial class Form1 : Form
 	{
-		PictureBox picB;
-		Label lbl1, lbl2, lbl3;
-		Rectangle rec = new Rectangle(10, 10, 200, 100);//x, y, width, height
-		Rectangle sq = new Rectangle(380, 10, 150, 150);
-		Rectangle circ = new Rectangle(220, 10, 150, 150);//Circle
+		PictureBox picB, img1;
+		Label lbl1, lbl2, lbl3, lbl4, lbl5;
+		Rectangle rec = new Rectangle(60, 40, 100, 100);//x, y, width, height
+		Rectangle sq = new Rectangle(380, 40, 100, 100);
+		Rectangle circ = new Rectangle(220, 40, 100, 100);//Circle
 		bool r, s, c;//clicked
 		int r1 = 0, r2 = 0, s1 = 0, s2 = 0, c1 = 0, c2 = 0;//X,Y
 		int X, Y, dX, dY;
 		int LastClicked = 0;
 		public Form1()
 		{
-			this.Height = 500;
-			this.Width = 600;
+			this.Height = 600;
+			this.Width = 700;
 			this.Text = "Drag and Drop";
 
 			picB = new PictureBox
 			{
-				Size = new Size(560, 400),
+				Size = new Size(660, 540),
 				Location = new Point(10, 10),
 				BorderStyle=BorderStyle.FixedSingle
 			};
@@ -37,31 +37,70 @@ namespace DradAndDrop
 			picB.MouseDown += PicB_MouseDown;
 			picB.MouseUp += PicB_MouseUp;
 			picB.MouseMove += PicB_MouseMove;
+
+			img1 = new PictureBox()
+			{
+				Image = Image.FromFile("slon.jpg"),
+				Size = new Size(100, 150),
+				Location = new Point(20, 30),
+				SizeMode = PictureBoxSizeMode.Normal
+		};
+
 			lbl1 = new Label() {
-				Text = "Вид",
-				Size = new Size(100, 60),
-				Location = new Point(30, 380),
-				BackColor = Color.PowderBlue
+				Text = "Найди маму",
+				Size = new Size(300, 30),
+				Location = new Point(170, 13),
+				BackColor = Color.PowderBlue,
+				Font = new Font("Arial", 20, FontStyle.Bold),
+				AutoSize = false,
+				TextAlign = ContentAlignment.MiddleCenter
 			};
 			lbl2 = new Label()
 			{
-				Text = "Форма",
+				Text = "мама 2",
 				Size = new Size(100, 60),
 				Location = new Point(210, 380),
-				BackColor = Color.PowderBlue
+				BackColor = Color.PowderBlue,
+				AutoSize = false,
+				TextAlign = ContentAlignment.MiddleCenter
 			};
 			lbl3 = new Label()
 			{
-				Text = "Информация",
+				Text = "мама 3",
 				Size = new Size(100, 60),
 				Location = new Point(400, 380),
-				BackColor = Color.PowderBlue
+				BackColor = Color.PowderBlue,
+				AutoSize = false,
+				TextAlign = ContentAlignment.MiddleCenter
+			};
+			lbl4 = new Label()
+			{
+				Text = "мама 4",
+				Size = new Size(100, 60),
+				Location = new Point(550, 380),
+				BackColor = Color.PowderBlue,
+				AutoSize = false,
+				TextAlign = ContentAlignment.MiddleCenter
+			};
+			lbl5 = new Label()
+			{
+				Text = "мама 1",
+				Size = new Size(100, 60),
+				Location = new Point(20, 380),
+				BackColor = Color.PowderBlue,
+				AutoSize = false,
+				TextAlign = ContentAlignment.MiddleCenter
 			};
 			this.Controls.Add(lbl1);
 			this.Controls.Add(lbl2);
 			this.Controls.Add(lbl3);
+			this.Controls.Add(lbl4);
+			this.Controls.Add(lbl5);
+			//this.Controls.Add(img1);
 			this.Controls.Add(picB);
+			
 		}
+
 
 		private void PicB_MouseMove(object sender, MouseEventArgs e)
 		{
@@ -81,27 +120,30 @@ namespace DradAndDrop
 				circ.Y = e.Y - c2;
 			}
 
-			if ((lbl1.Location.X < sq.X + sq.Width) && (lbl1.Location.X > sq.X))
+			if ((lbl2.Location.X < sq.X + sq.Width) && (lbl2.Location.X > sq.X))
 			{
-				if ((lbl1.Location.Y < sq.Y + sq.Height) && (lbl1.Location.Y > sq.Y))
+				if ((lbl2.Location.Y < sq.Y + sq.Height) && (lbl2.Location.Y > sq.Y))
 				{
-					lbl3.Text = "Розовый Квадрат";
+					lbl1.Text = "Правильно!";
 				}
 			}
-			if ((lbl1.Location.X < circ.X + circ.Width) && (lbl1.Location.X > circ.X))
+			if ((lbl3.Location.X < circ.X + circ.Width) && (lbl3.Location.X > circ.X))
 			{
-				if ((lbl1.Location.Y < circ.Y + circ.Height) && (lbl1.Location.Y > circ.Y))
+				if ((lbl3.Location.Y < circ.Y + circ.Height) && (lbl3.Location.Y > circ.Y))
 				{
-					lbl3.Text = "Голубой Круг";
+					lbl1.Text = "Голубой квадрат";
+					
+
 				}
 			}
-			if ((lbl1.Location.X < rec.X + rec.Width) && (lbl1.Location.X > rec.X))
+			if ((lbl4.Location.X < rec.X + rec.Width) && (lbl4.Location.X > rec.X))
 			{
-				if ((lbl1.Location.Y < rec.Y + rec.Height) && (lbl1.Location.Y > rec.Y))
+				if ((lbl4.Location.Y < rec.Y + rec.Height) && (lbl4.Location.Y > rec.Y))
 				{
-					lbl3.Text = "Фиолетовый Прямоугольник";
+					lbl1.Text = "Фиолетовый Прямоугольник";
 				}
 			}
+
 
 			picB.Invalidate();
 		}
@@ -110,9 +152,31 @@ namespace DradAndDrop
 		{
 			r = false;
 			s = false;
-			c = false;
+			c = false;/*
 
-			if (LastClicked==2)
+			if ((lbl2.Location.X < sq.X + sq.Width) && (lbl2.Location.X > sq.X))
+			{
+				if ((lbl2.Location.Y < sq.Y + sq.Height) && (lbl2.Location.Y > sq.Y))
+				{
+					LastClicked = 3;
+				}
+			}
+			if ((lbl2.Location.X < circ.X + circ.Width) && (lbl2.Location.X > circ.X))
+			{
+				if ((lbl2.Location.Y < circ.Y + circ.Height) && (lbl2.Location.Y > circ.Y))
+				{
+					LastClicked = 2;
+				}
+			}
+			if ((lbl2.Location.X < rec.X + rec.Width) && (lbl2.Location.X > rec.X))
+			{
+				if ((lbl2.Location.Y < rec.Y + rec.Height) && (lbl2.Location.Y > rec.Y))
+				{
+					LastClicked = 1;
+				}
+			}
+
+			if (LastClicked == 2)
 			{
 				if ((lbl2.Location.X < circ.X + circ.Width) && (lbl2.Location.X > circ.X))
 				{
@@ -134,6 +198,51 @@ namespace DradAndDrop
 					}
 				}
 			}
+
+			if (LastClicked==1)
+			{
+				if ((lbl2.Location.X < rec.X + rec.Width) && (lbl2.Location.X > rec.X))
+				{
+					if ((lbl2.Location.Y < rec.Y + rec.Height) && (lbl2.Location.Y > rec.Y))
+					{
+						X = rec.X;
+						Y = rec.Y;
+						dX = r1;
+						dY = r2;
+						rec.X = sq.X;
+						rec.Y = sq.Y;
+						r1 = s1;
+						r2 = s2;
+
+						sq.X = X;
+						sq.Y = Y;
+						s1 = dX;
+						s2 = dY;
+					}
+				}
+			}
+			if (LastClicked == 3)
+			{
+				if ((lbl2.Location.X < sq.X + sq.Width) && (lbl2.Location.X > sq.X))
+				{
+					if ((lbl2.Location.Y < sq.Y + sq.Height) && (lbl2.Location.Y > sq.Y))
+					{
+						X = sq.X;
+						Y = sq.Y;
+						dX = s1;
+						dY = s2;
+						sq.X = circ.X;
+						sq.Y = circ.Y;
+						s1 = c1;
+						s2 = c2;
+
+						circ.X = X;
+						circ.Y = Y;
+						r1 = dX;
+						r2 = dY;
+					}
+				}
+			}*/
 		}
 
 		private void PicB_MouseDown(object sender, MouseEventArgs e)
@@ -171,7 +280,7 @@ namespace DradAndDrop
 		{
 			e.Graphics.FillRectangle(Brushes.Indigo, rec);
 			e.Graphics.FillRectangle(Brushes.DarkSalmon, sq);
-			e.Graphics.FillEllipse(Brushes.DarkTurquoise, circ);
+			e.Graphics.FillRectangle(Brushes.DarkTurquoise, circ);
 		}
 	}
 }
